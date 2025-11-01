@@ -1,90 +1,4 @@
-# import streamlit as st
-# import pandas as pd
-# import numpy as np
-# import joblib
 
-# from babel.numbers import format_currency
-
-# def format_inr(amount):
-#     # Format the amount as INR currency using the 'en_IN' locale
-#     formatted_amount = format_currency(amount, 'INR', locale='en_IN')
-#     return formatted_amount
-
-# model = joblib.load('HousePricingModel.joblib')
-# Avg_Land_Price_per_sqft = joblib.load('Average_Land_Price_per_sqft.joblib')
-
-# mumbai = pd.read_csv("MumbaiMerged.csv")
-# st.title("Mumbai House Price Estimator")
-# #st.write("Mumbai House Price Estimator")
-# bhk = st.slider("Number of Bedreeoms" , step=1 , min_value=1 , max_value=4)
-# min = 300
-# max = 2000
-# area = st.slider("Area in SquareFt." , step=50 , min_value=min , max_value=max)
-# #bhk = st.session_state.BHK
-# new = int(st.checkbox('New Property'))
-# st.header("Additional Features")
-# st.write("Activities")
-# Gym = int(st.checkbox("Gym"))
-# children_play_area = int(st.checkbox("Children Play area"))
-# club_house = int(st.checkbox("ClubHouse"))
-# indoor_games = int(st.checkbox("Indoor Games"))
-# swiming_pool = int(st.checkbox("Swimming Pool"))
-# jogging_trak = int(st.checkbox("Jogging Track"))
-# garden = int(st.checkbox("Landscape Garden"))
-
-# st.write("Aminities")
-# lift_aval = int(st.checkbox("Lift Availability"))
-# car_parking = int(st.checkbox("Car Parking"))
-# Security = int(st.checkbox("24/7 Security"))
-# Maintenance_staff = int(st.checkbox("Maintenance Staff"))
-# Intercom = int(st.checkbox("Intercom"))
-
-
-# localities = mumbai.columns[18::]
-# locality = st.selectbox("Choose your location" ,localities)
-# estimate = st.button("Estimate")
-
-# mumbai = mumbai.iloc[:: , 2::]
-
-# #st.write(mumbai.columns)
-
-# # '''
-# # 'Area', 'No. of Bedrooms', 'New/Resale', 'Gymnasium',
-# # 'Lift Available', 'Car Parking', 'Maintenance Staff', '24x7 Security',
-# # 'Children's Play Area', 'Clubhouse', 'Intercom', 'Landscaped Gardens',
-# # 'Indoor Games', 'Jogging Track', 'Swimming Pool',
-# # 'Average_price_per_sq_ft'
-# # '''
-# if estimate:
-#     mumbai2 = pd.DataFrame(columns=mumbai.columns)
-
-#     input_list = [0]*len(mumbai.columns)
-#     input_list[0] = np.log(area)
-#     input_list[1] = bhk
-#     input_list[2] = new
-#     input_list[3] = Gym
-#     input_list[4] =lift_aval
-#     input_list[5] = car_parking
-#     input_list[6] = Maintenance_staff
-#     input_list[7] = Security
-#     input_list[8] = children_play_area
-#     input_list[9] = club_house
-#     input_list[10] = Intercom
-#     input_list[11] = garden
-#     input_list[12] = indoor_games
-#     input_list[13] = jogging_trak
-#     input_list[14] = swiming_pool
-#     input_list[15] = np.log(Avg_Land_Price_per_sqft[locality])
-#     i = 0
-#     for l in mumbai.columns:
-#         if(l == locality):
-#             input_list[i] =1 
-#         i = i+1
-
-#     #st.dataframe(mumbai2)
-#     #st.write(input_list)
-#     mumbai2.loc[len(mumbai2)] = input_list
-#     st.success("₹ " + str(round(np.exp(model.predict(mumbai2)[0]))))
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -289,3 +203,4 @@ if estimate:
 
     price = np.exp(model.predict(mumbai2)[0])
     st.markdown(f"<div class='result-box'>🏠 Estimated Price: <br> ₹ {round(price):,}</div>", unsafe_allow_html=True)
+

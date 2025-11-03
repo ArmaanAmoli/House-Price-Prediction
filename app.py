@@ -5,14 +5,12 @@ import numpy as np
 import joblib
 from babel.numbers import format_currency
 
-# ======= Custom Glassmorphism CSS =======
 st.markdown("""
     <style>
-    /* ====== Background Image Fullscreen ====== */
+    /* ====== Black Background ====== */
     [data-testid="stAppViewContainer"] {
         background: 
-            linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)),
-            url("https://images.unsplash.com/photo-1603262110263-fb3d0e0b9c53?auto=format&fit=crop&w=1920&q=80");
+            linear-gradient(rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 1));
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
@@ -21,7 +19,8 @@ st.markdown("""
     }
 
     /* ====== Remove default white areas ====== */
-    [data-testid="stHeader"], [data-testid="stToolbar"], [data-testid="stSidebar"], [data-testid="stDecoration"], [data-testid="stMainBlockContainer"] > div {
+    [data-testid="stHeader"], [data-testid="stToolbar"], [data-testid="stSidebar"], 
+    [data-testid="stDecoration"], [data-testid="stMainBlockContainer"] > div {
         background: transparent !important;
     }
 
@@ -74,12 +73,12 @@ st.markdown("""
         font-size: 1.8rem;
         text-align: center;
         font-weight: 700;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(0, 0, 0, 0.6);
         border-radius: 10px;
         padding: 20px;
         margin-top: 25px;
         color: #ffffff;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.4);
     }
 
     /* ====== Section Headings ====== */
@@ -202,5 +201,14 @@ if estimate:
     mumbai2.loc[len(mumbai2)] = input_list
 
     price = np.exp(model.predict(mumbai2)[0])
+    #Data that we took is of 2020 assuming an average growth rate of 7.5% we will adjust the price
+    import datetime
+    current_year = datetime.date.today().year
+    data_year = 2020
+
+    while(data_year < current_year):
+        price += (7.5/100)*(price)
+        data_year = data_year + 1
     st.markdown(f"<div class='result-box'>🏠 Estimated Price: <br> ₹ {round(price):,}</div>", unsafe_allow_html=True)
+
 

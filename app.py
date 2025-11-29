@@ -1,181 +1,138 @@
-
 import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
 from babel.numbers import format_currency
 
+# ----------------- SIMPLE LIGHT THEME CSS ---------------------
 st.markdown("""
-    <style>
-    /* ====== Light Background ====== */
-    [data-testid="stAppViewContainer"] {
-        background-color: #f4f6f9 !important;
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        font-family: 'Inter', sans-serif;
-        color: #1f2937;
-    }
+<style>
+body {
+    background-color: #ffffff;
+}
 
-    /* Remove default transparent areas */
-    [data-testid="stHeader"], [data-testid="stToolbar"], [data-testid="stSidebar"], 
-    [data-testid="stDecoration"], [data-testid="stMainBlockContainer"] > div {
-        background: transparent !important;
-    }
+[data-testid="stAppViewContainer"] {
+    background-color: #ffffff !important;
+    font-family: 'Inter', sans-serif;
+    color: #1f2937;
+}
 
-    /* ====== Main Title ====== */
-    .main-title {
-        text-align: center;
-        font-size: 2.8rem;
-        font-weight: 800;
-        color: #1f2937;
-        margin-bottom: 1.2rem;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
+/* Clean title */
+.main-title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
 
-    /* ====== Glass Card Container ====== */
-    .glass-card {
-        background: rgba(255, 255, 255, 0.75);
-        backdrop-filter: blur(12px);
-        border-radius: 12px;
-        padding: 20px;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    }
+/* Simple input sections */
+.simple-box {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    padding: 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
 
-    /* ====== Light Inputs ====== */
-    .stTextInput > div > div > input,
-    .stNumberInput > div > div > input {
-        background: white !important;
-        color: #1f2937 !important;
-        border-radius: 8px;
-        border: 1px solid #d1d5db !important;
-        padding: 0.5rem;
-    }
+/* Clean button */
+.stButton button {
+    width: 100%;
+    background: #2563eb;
+    color: white;
+    border-radius: 6px;
+    border: none;
+    height: 2.6rem;
+}
 
-    /* ====== Sliders ====== */
-    .stSlider > div > div > div > div {
-        background: #2563eb !important;
-        height: 6px;
-    }
+.stButton button:hover {
+    background: #1d4ed8;
+}
 
-    /* ====== Buttons ====== */
-    .stButton button {
-        width: 100%;
-        background: #2563eb;
-        color: white;
-        font-weight: 600;
-        border-radius: 8px;
-        border: none;
-        height: 2.8rem;
-        transition: all 0.25s ease-in-out;
-    }
-
-    .stButton button:hover {
-        background: #1d4ed8;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 10px rgba(29, 78, 216, 0.3);
-    }
-
-    /* ====== Result Box ====== */
-    .result-box {
-        font-size: 1.8rem;
-        text-align: center;
-        font-weight: 700;
-        background: white;
-        border-radius: 10px;
-        padding: 20px;
-        margin-top: 25px;
-        color: #1f2937;
-        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-        border: 1px solid #e5e7eb;
-    }
-
-    /* ====== Section Headings ====== */
-    h2, .stSubheader {
-        color: #1f2937 !important;
-        font-weight: 700;
-    }
-
-    /* ====== Dropdowns ====== */
-    div[data-baseweb="select"] > div {
-        background: white !important;
-        color: #1f2937 !important;
-        border-radius: 8px;
-        border: 1px solid #d1d5db;
-    }
-
-    /* ====== Mobile ====== */
-    @media (max-width: 768px) {
-        .main-title {
-            font-size: 2rem;
-        }
-    }
-    </style>
+/* Simple result box */
+.result-box {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    padding: 18px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-top: 20px;
+}
+</style>
 """, unsafe_allow_html=True)
 
 
-
-
-
-# ======= Load Models =======
+# ----------------- LOAD MODELS ---------------------
 model = joblib.load('HousePricingModel.joblib')
 Avg_Land_Price_per_sqft = joblib.load('Average_Land_Price_per_sqft.joblib')
 mumbai = pd.read_csv("MumbaiMerged.csv")
 
-# ======= Helper =======
+
 def format_inr(amount):
     return format_currency(amount, 'INR', locale='en_IN')
 
-# ======= App Title =======
-st.markdown("<h1 class='main-title'>🏙️ Mumbai House Price Estimator</h1>", unsafe_allow_html=True)
 
-# ======= Input Section =======
+# ----------------- TITLE ---------------------
+st.markdown("<h1 class='main-title'>Mumbai House Price Estimator</h1>", unsafe_allow_html=True)
+
+
+# ----------------- INPUT SECTION ---------------------
 with st.container():
-    st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
-    bhk = st.slider("Number of Bedrooms", 1, 4, 2, step=1)
+    st.markdown("<div class='simple-box'>", unsafe_allow_html=True)
+    bhk = st.slider("Number of Bedrooms", 1, 4, 2)
     area = st.slider("Area in Square Feet", 300, 2000, 750, step=50)
     new = int(st.checkbox("New Property"))
     st.markdown("</div>", unsafe_allow_html=True)
 
-# ======= Additional Features =======
+# ----------------- FEATURES ---------------------
 with st.container():
-    st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
-    st.subheader("🏋️ Additional Features")
+    st.markdown("<div class='simple-box'>", unsafe_allow_html=True)
+    st.subheader("Additional Features")
     col1, col2 = st.columns(2)
+
     with col1:
         Gym = int(st.checkbox("Gym"))
         children_play_area = int(st.checkbox("Children Play Area"))
         club_house = int(st.checkbox("Club House"))
         indoor_games = int(st.checkbox("Indoor Games"))
+
     with col2:
         swimming_pool = int(st.checkbox("Swimming Pool"))
         jogging_trak = int(st.checkbox("Jogging Track"))
         garden = int(st.checkbox("Landscape Garden"))
+
     st.markdown("</div>", unsafe_allow_html=True)
 
-# ======= Amenities =======
+# ----------------- AMENITIES ---------------------
 with st.container():
-    st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
-    st.subheader("🚪 Amenities")
+    st.markdown("<div class='simple-box'>", unsafe_allow_html=True)
+    st.subheader("Amenities")
+
     col3, col4 = st.columns(2)
+
     with col3:
         lift_aval = int(st.checkbox("Lift Available"))
         car_parking = int(st.checkbox("Car Parking"))
         Security = int(st.checkbox("24/7 Security"))
+
     with col4:
         Maintenance_staff = int(st.checkbox("Maintenance Staff"))
         Intercom = int(st.checkbox("Intercom"))
+
     st.markdown("</div>", unsafe_allow_html=True)
 
-# ======= Locality =======
+
+# ----------------- LOCALITY ---------------------
 localities = mumbai.columns[18::]
-locality = st.selectbox("📍 Choose your location", localities)
-estimate = st.button("💰 Estimate Price")
+locality = st.selectbox("Choose your location", localities)
+estimate = st.button("Estimate Price")
 
 mumbai = mumbai.iloc[:, 2:]
 
-# ======= Prediction Logic =======
+
+# ----------------- PREDICTION ---------------------
 if estimate:
     mumbai2 = pd.DataFrame(columns=mumbai.columns)
     input_list = [0] * len(mumbai.columns)
@@ -197,7 +154,6 @@ if estimate:
     input_list[14] = swimming_pool
     input_list[15] = np.log(Avg_Land_Price_per_sqft[locality])
 
-    # One-hot encode locality
     for i, l in enumerate(mumbai.columns):
         if l == locality:
             input_list[i] = 1
@@ -205,18 +161,13 @@ if estimate:
     mumbai2.loc[len(mumbai2)] = input_list
 
     price = np.exp(model.predict(mumbai2)[0])
-    #Data that we took is of 2020 assuming an average growth rate of 15% we will adjust the price
+
     import datetime
     current_year = datetime.date.today().year
     data_year = 2020
 
-    while(data_year < current_year):
-        price += (15/100)*(price)
-        data_year = data_year + 1
-    st.markdown(f"<div class='result-box'>🏠 Estimated Price: <br> ₹ {round(price):,}</div>", unsafe_allow_html=True)
+    while data_year < current_year:
+        price += 0.15 * price
+        data_year += 1
 
-
-
-
-
-
+    st.markdown(f"<div class='result-box'>Estimated Price: ₹ {round(price):,}</div>", unsafe_allow_html=True)

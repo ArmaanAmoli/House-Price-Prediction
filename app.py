@@ -201,14 +201,15 @@ if estimate:
     mumbai2.loc[len(mumbai2)] = input_list
 
     price = np.exp(model.predict(mumbai2)[0])
-    #Data that we took is of 2020 assuming an average growth rate of 7.5% we will adjust the price
+    #Data that we took is of 2020 assuming an average growth rate of 15% we will adjust the price
     import datetime
     current_year = datetime.date.today().year
     data_year = 2020
 
     while(data_year < current_year):
-        price += (7.5/100)*(price)
+        price += (15/100)*(price)
         data_year = data_year + 1
     st.markdown(f"<div class='result-box'>🏠 Estimated Price: <br> ₹ {round(price):,}</div>", unsafe_allow_html=True)
+
 
 

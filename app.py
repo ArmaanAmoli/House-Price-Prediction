@@ -28,7 +28,7 @@ st.markdown("""
         text-align: center;
         font-size: 2.8rem;
         font-weight: 800;
-        color: #ffffff;
+        color: black;
         margin-bottom: 1.2rem;
         text-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
     }
@@ -209,6 +209,7 @@ if estimate:
         price += (15/100)*(price)
         data_year = data_year + 1
     st.markdown(f"<div class='result-box'>🏠 Estimated Price: <br> ₹ {round(price):,}</div>", unsafe_allow_html=True)
+
 
 
 

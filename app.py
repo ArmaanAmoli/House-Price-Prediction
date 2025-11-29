@@ -9,8 +9,7 @@ st.markdown("""
     <style>
     /* ====== Black Background ====== */
     [data-testid="stAppViewContainer"] {
-        background: 
-            linear-gradient(rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 1));
+        background-color: white;
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
@@ -210,6 +209,7 @@ if estimate:
         price += (15/100)*(price)
         data_year = data_year + 1
     st.markdown(f"<div class='result-box'>🏠 Estimated Price: <br> ₹ {round(price):,}</div>", unsafe_allow_html=True)
+
 
 
 

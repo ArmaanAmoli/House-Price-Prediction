@@ -5,63 +5,7 @@ import joblib
 from babel.numbers import format_currency
 
 # ----------------- SIMPLE LIGHT THEME CSS ---------------------
-st.markdown("""
-<style>
-body {
-    background-color: #ffffff;
-}
 
-[data-testid="stAppViewContainer"] {
-    background-color: #ffffff !important;
-    font-family: 'Inter', sans-serif;
-    color: #1f2937;
-}
-
-/* Clean title */
-.main-title {
-    text-align: center;
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: #1f2937;
-    margin-bottom: 1rem;
-}
-
-/* Simple input sections */
-.simple-box {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    padding: 18px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-/* Clean button */
-.stButton button {
-    width: 100%;
-    background: #2563eb;
-    color: white;
-    border-radius: 6px;
-    border: none;
-    height: 2.6rem;
-}
-
-.stButton button:hover {
-    background: #1d4ed8;
-}
-
-/* Simple result box */
-.result-box {
-    background: #f9fafb;
-    border: 1px solid #e5e7eb;
-    padding: 18px;
-    border-radius: 8px;
-    text-align: center;
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin-top: 20px;
-}
-</style>
-""", unsafe_allow_html=True)
 
 
 # ----------------- LOAD MODELS ---------------------
@@ -171,3 +115,4 @@ if estimate:
         data_year += 1
 
     st.markdown(f"<div class='result-box'>Estimated Price: ₹ {round(price):,}</div>", unsafe_allow_html=True)
+

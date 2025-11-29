@@ -5,8 +5,95 @@ import joblib
 from babel.numbers import format_currency
 
 # ----------------- SIMPLE LIGHT THEME CSS ---------------------
-
-
+st.markdown("""
+<style>
+    /* General body styling */
+    .main {
+        background-color: #f8f9fa;
+        color: #212529;
+    }
+    
+    /* Title styling */
+    .main-title {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 2.5rem;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 2rem;
+        padding: 1rem;
+        border-bottom: 2px solid #3498db;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+    
+    /* Container styling */
+    .simple-box {
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #3498db;
+    }
+    
+    /* Result box styling */
+    .result-box {
+        background-color: #e8f4fc;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #3498db;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #2c3e50;
+        text-align: center;
+    }
+    
+    /* Subheader styling */
+    .stSubheader {
+        color: #2c3e50;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    
+    /* Slider styling */
+    .stSlider {
+        margin-bottom: 20px;
+    }
+    
+    /* Checkbox styling */
+    .stCheckbox {
+        margin-bottom: 10px;
+    }
+    
+    /* Selectbox styling */
+    .stSelectbox {
+        margin-bottom: 20px;
+    }
+    
+    /* Button styling */
+    .stButton > button {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .stButton > button:hover {
+        background-color: #2980b9;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    
+    /* Column styling */
+    .column {
+        padding: 10px;
+    }
+</style>
+""", unsafe_allow_html=True)
 
 # ----------------- LOAD MODELS ---------------------
 model = joblib.load('HousePricingModel.joblib')
@@ -115,4 +202,3 @@ if estimate:
         data_year += 1
 
     st.markdown(f"<div class='result-box'>Estimated Price: ₹ {round(price):,}</div>", unsafe_allow_html=True)
-

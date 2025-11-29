@@ -7,52 +7,62 @@ from babel.numbers import format_currency
 
 st.markdown("""
     <style>
-    /* ====== Black Background ====== */
+    /* ====== Light Background ====== */
     [data-testid="stAppViewContainer"] {
-        background-color: white;
+        background-color: #f4f6f9 !important;
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
         font-family: 'Inter', sans-serif;
-        color: #ffffff;
+        color: #1f2937;
     }
 
-    /* ====== Remove default white areas ====== */
+    /* Remove default transparent areas */
     [data-testid="stHeader"], [data-testid="stToolbar"], [data-testid="stSidebar"], 
     [data-testid="stDecoration"], [data-testid="stMainBlockContainer"] > div {
         background: transparent !important;
     }
 
-    /* ====== Centered Main Title ====== */
+    /* ====== Main Title ====== */
     .main-title {
         text-align: center;
         font-size: 2.8rem;
         font-weight: 800;
-        color: black;
+        color: #1f2937;
         margin-bottom: 1.2rem;
-        text-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
-    /* ====== Transparent input fields ====== */
+    /* ====== Glass Card Container ====== */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(12px);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    /* ====== Light Inputs ====== */
     .stTextInput > div > div > input,
     .stNumberInput > div > div > input {
-        background: rgba(255, 255, 255, 0.12);
-        color: #ffffff;
+        background: white !important;
+        color: #1f2937 !important;
         border-radius: 8px;
-        border: 1px solid rgba(255,255,255,0.3);
+        border: 1px solid #d1d5db !important;
         padding: 0.5rem;
     }
 
     /* ====== Sliders ====== */
     .stSlider > div > div > div > div {
-        background: #3a86ff !important;
+        background: #2563eb !important;
         height: 6px;
     }
 
     /* ====== Buttons ====== */
     .stButton button {
         width: 100%;
-        background: #3a86ff;
+        background: #2563eb;
         color: white;
         font-weight: 600;
         border-radius: 8px;
@@ -62,9 +72,9 @@ st.markdown("""
     }
 
     .stButton button:hover {
-        background: #2563eb;
+        background: #1d4ed8;
         transform: translateY(-1px);
-        box-shadow: 0 4px 10px rgba(37, 99, 235, 0.4);
+        box-shadow: 0 4px 10px rgba(29, 78, 216, 0.3);
     }
 
     /* ====== Result Box ====== */
@@ -72,35 +82,30 @@ st.markdown("""
         font-size: 1.8rem;
         text-align: center;
         font-weight: 700;
-        background: rgba(0, 0, 0, 0.6);
+        background: white;
         border-radius: 10px;
         padding: 20px;
         margin-top: 25px;
-        color: #ffffff;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+        color: #1f2937;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        border: 1px solid #e5e7eb;
     }
 
     /* ====== Section Headings ====== */
     h2, .stSubheader {
-        color: #ffffff !important;
+        color: #1f2937 !important;
         font-weight: 700;
-        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
     }
 
     /* ====== Dropdowns ====== */
     div[data-baseweb="select"] > div {
-        background: rgba(255, 255, 255, 0.12) !important;
-        color: #fff !important;
+        background: white !important;
+        color: #1f2937 !important;
         border-radius: 8px;
-        border: 1px solid rgba(255,255,255,0.3);
+        border: 1px solid #d1d5db;
     }
 
-    /* ====== Remove extra padding ====== */
-    section.main > div {
-        padding-top: 1rem;
-    }
-
-    /* ====== Responsive tweaks ====== */
+    /* ====== Mobile ====== */
     @media (max-width: 768px) {
         .main-title {
             font-size: 2rem;
@@ -209,6 +214,7 @@ if estimate:
         price += (15/100)*(price)
         data_year = data_year + 1
     st.markdown(f"<div class='result-box'>🏠 Estimated Price: <br> ₹ {round(price):,}</div>", unsafe_allow_html=True)
+
 
 
 

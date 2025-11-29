@@ -13,27 +13,7 @@ st.markdown("""
         color: #212529;
     }
     
-    /* Title styling */
-    .main-title {
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: 2.5rem;
-        color: #2c3e50;
-        text-align: center;
-        margin-bottom: 2rem;
-        padding: 1rem;
-        border-bottom: 2px solid #3498db;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-    }
     
-    /* Container styling */
-    .simple-box {
-        background-color: white;
-        border-radius: 10px;
-        padding: 20px;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        border-left: 5px solid #3498db;
-    }
     
     /* Result box styling */
     .result-box {
@@ -49,26 +29,7 @@ st.markdown("""
         text-align: center;
     }
     
-    /* Subheader styling */
-    .stSubheader {
-        color: #2c3e50;
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    }
-    
-    /* Slider styling */
-    .stSlider {
-        margin-bottom: 20px;
-    }
-    
-    /* Checkbox styling */
-    .stCheckbox {
-        margin-bottom: 10px;
-    }
-    
-    /* Selectbox styling */
-    .stSelectbox {
-        margin-bottom: 20px;
-    }
+   
     
     /* Button styling */
     .stButton > button {
@@ -202,3 +163,4 @@ if estimate:
         data_year += 1
 
     st.markdown(f"<div class='result-box'>Estimated Price: ₹ {round(price):,}</div>", unsafe_allow_html=True)
+
